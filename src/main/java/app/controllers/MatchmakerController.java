@@ -15,6 +15,7 @@ public class MatchmakerController {
         app.get("/projectname", ctx -> index(ctx, connectionPool));
         app.get("matchmaker/createuser", ctx-> createUser(ctx,connectionPool));
         app.post("matchmaker/login", ctx -> login(ctx, connectionPool));
+        app.post("matchmaker/createuser", ctx -> createPreference(ctx, connectionPool));
     }
 
     private static void index(Context ctx, ConnectionPool connectionPool)
@@ -78,6 +79,23 @@ public class MatchmakerController {
         {
             ctx.attribute("message", "Dine to passwords matcher ikke! Prøv igen");
             ctx.render("createuser.html");
+        }
+
+    }
+
+    private static void createPreference(Context ctx, ConnectionPool connectionPool){
+        String hairColor = ctx.formParam("haircolor");
+        String eyeColor = ctx.formParam("eyecolor");
+        int height =Integer.parseInt(ctx.formParam("height"));
+        String sex = ctx.formParam("sex");
+        String race = ctx.formParam("race");
+
+        try {
+
+            MatchmakerMapper.createPreference(hairColor, eyeColor, height, sex, race, connectionPool);
+            ctx.render("createuser.html");
+        }catch (DatabaseException e){
+            ctx.render("index.html");
         }
 
     }

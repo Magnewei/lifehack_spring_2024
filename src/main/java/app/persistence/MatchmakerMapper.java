@@ -73,4 +73,33 @@ public class MatchmakerMapper
             throw new DatabaseException(msg, e.getMessage());
         }
     }
+
+    public static void createPreference(String hairColor, String eyeColor, int height, String sex, String race, ConnectionPool connectionPool) throws DatabaseException {
+
+        String sql = "insert into preference (haircolor, eyecolor, height, sex, race) + values (?, ?, ?, ?, ?)";
+
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        )
+        {
+            ps.setString(1, hairColor);
+            ps.setString(2, eyeColor);
+            ps.setInt(3, height);
+            ps.setString(4, sex);
+            ps.setString(5, race);
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected != 1)
+            {
+                throw new DatabaseException("Fejl ved oprettelse af ny bruger");
+            }
+
+
+        } catch (SQLException e){
+            String msg = "Der er sket en fejl. Prøv igen";
+            throw new DatabaseException(msg, e.getMessage());
+        }
+
+    }
 }
