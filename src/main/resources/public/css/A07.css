@@ -9,3 +9,27 @@
 .button:hover{
     background-color: lightgray;
 }
+.container {
+    position: relative;
+    display: inline-block;
+}
+
+.button-image {
+    width: 50px; /* Adjust width and height as needed */
+    height: auto;
+}
+
+.button-text {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white; /* Text color */
+    font-size: 8px; /* Text size */
+    font-weight: bold; /* Text weight */
+    text-align: center;
+    text-decoration: none; /* Remove underline */
+    padding: 10px 20px; /* Padding around the text */
+    border-radius: 5px; /* Rounded corners */
+    pointer-events: none; /* Ignore pointer events so image is clickable */
+}

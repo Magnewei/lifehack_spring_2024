@@ -58,6 +58,7 @@ public class GalgeSpil {
                 shownWord = replaceCharBasedOnIndex(shownWord, letter.toUpperCase().charAt(0), i);
             }
         }
+
     }
     private String replaceCharBasedOnIndex(String word, char letter, int index){
         String newWord="";
@@ -92,6 +93,8 @@ public class GalgeSpil {
         }
         return false;
     }
+
+
     public void nextStage(){
             stageCount++;
     }
